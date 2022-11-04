@@ -90,8 +90,8 @@ public class StringArrayUtils {
         String alphabet = "abcdefghijklmnopqrstuvwxyz";
         String answer = Arrays.toString(array).toLowerCase();
 
-        for ( int i = 0; i < alphabet.length(); i++){
-            if (!answer.contains(String.valueOf(alphabet.charAt(i)))){
+        for (int i = 0; i < alphabet.length(); i++) {
+            if (!answer.contains(String.valueOf(alphabet.charAt(i)))) {
                 return false;
             }
         }
@@ -136,7 +136,17 @@ public class StringArrayUtils {
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
-        return null;
+        ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(array));
+        ArrayList<String> removeList = new ArrayList<>();
+        removeList.add("");
+        for (int i = 0; i < array.length - 1; i++) {
+            if (array[i].equals(array[i + 1])) {
+                arrayList.set(i + 1, "");
+            }
+        }
+        arrayList.removeAll(removeList);
+        String[] arrayFinal = arrayList.toArray(new String[arrayList.size()]);
+        return arrayFinal;
     }
 
     /**
@@ -144,7 +154,17 @@ public class StringArrayUtils {
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-        return null;
+        ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(array));
+        for (int i = 0; i < array.length - 1; i++) {
+            if (array[i].equals(array[i + 1])) {
+                arrayList.set(i, array[i] + "");
+            } else {
+                arrayList.set(i, array[i] + " ");
+            }
+        }
+        String arrayListString = String.join("", arrayList);
+        String[] finalArray = arrayListString.split(" ");
+        return finalArray;
     }
 
 
